@@ -18,11 +18,18 @@ import { Button } from "@/components/ui/button";
 import { FormNotification } from "@/components/auth/form-notification";
 import { login } from "@/actions/login";
 import { useState, useTransition } from "react";
+import { useSearchParams } from "next/navigation";
 
 export function LoginForm() {
 	const [isPending, startTransition] = useTransition();
 	const [error, setError] = useState("");
 	const [success, setSuccess] = useState("");
+	const searchParams = useSearchParams();
+
+	const urlError =
+		searchParams.get("error") === "OAuthAccountNotLinked"
+			? "This account is already linked to another user."
+			: "An error occurred. Please try again.";
 
 	const form = useForm<z.infer<typeof LoginSchema>>({
 		resolver: zodResolver(LoginSchema),
@@ -88,8 +95,8 @@ export function LoginForm() {
 						/>
 					</div>
 					<FormNotification
-						message={error ? error : success}
-						type={error ? "error" : "success"}
+						message={(error ? error : success) || urlError}
+						type={urlError ? "error" : error ? "error" : "success"}
 					/>
 					<Button type="submit" className="w-full" disabled={isPending}>
 						Login
