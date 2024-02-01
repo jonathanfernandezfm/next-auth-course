@@ -1,14 +1,10 @@
 import { PrismaClient } from "@prisma/client";
 
 declare global {
-	// biome-ignore lint/style/noVar: var is needed for globalThis
+	// biome-ignore lint/style/noVar: <explanation>
 	var prisma: PrismaClient | undefined;
 }
 
 export const db = globalThis.prisma || new PrismaClient();
 
-if (process.env.NODE_ENV !== "production") {
-	if (!globalThis.prisma) {
-		globalThis.prisma = db;
-	}
-}
+if (process.env.NODE_ENV !== "production") globalThis.prisma = db;

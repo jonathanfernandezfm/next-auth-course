@@ -35,8 +35,8 @@ export function LoginForm() {
 	const onSubmit = (values: z.infer<typeof LoginSchema>) => {
 		startTransition(() => {
 			login(values).then((data) => {
-				if (data.error) setError(data.error);
-				if (data.success) setSuccess(data.success);
+				if (data?.error) setError(data.error);
+				if (data?.success) setSuccess(data.success);
 			});
 		});
 	};
