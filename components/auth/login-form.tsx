@@ -29,7 +29,9 @@ export function LoginForm() {
 	const urlError =
 		searchParams.get("error") === "OAuthAccountNotLinked"
 			? "This account is already linked to another user."
-			: "An error occurred. Please try again.";
+			: searchParams.get("error")
+			  ? "An error occurred. Please try again."
+			  : "";
 
 	const form = useForm<z.infer<typeof LoginSchema>>({
 		resolver: zodResolver(LoginSchema),
