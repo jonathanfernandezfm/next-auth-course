@@ -1,5 +1,5 @@
 import { ErrorCard } from "@/components/auth/error-card";
 
-export default async function ErrorPage() {
+export default function ErrorPage() {
 	return <ErrorCard />;
 }
