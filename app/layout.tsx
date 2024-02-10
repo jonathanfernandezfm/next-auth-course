@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { GeistSans } from "geist/font/sans";
+import { Toaster } from "@/components/ui/sonner";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -14,7 +15,10 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en">
-			<body className={GeistSans.className}>{children}</body>
+			<body className={GeistSans.className}>
+				<Toaster />
+				{children}
+			</body>
 		</html>
 	);
 }
