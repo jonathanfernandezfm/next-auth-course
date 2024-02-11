@@ -3,10 +3,16 @@
 import { Button } from "@/components/ui/button";
 import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
 import { signIn } from "next-auth/react";
+import { useSearchParams } from "next/navigation";
 
 export function Social() {
+	const searchParams = useSearchParams();
+	const callbackUrl = searchParams.get("callbackUrl");
+
 	const onClick = async (provider: "google" | "github") => {
-		await signIn(provider, { callbackUrl: DEFAULT_LOGIN_REDIRECT });
+		await signIn(provider, {
+			callbackUrl: callbackUrl || DEFAULT_LOGIN_REDIRECT,
+		});
 	};
 
 	return (

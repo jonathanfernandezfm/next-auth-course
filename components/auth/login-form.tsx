@@ -35,6 +35,8 @@ export function LoginForm() {
 			  ? "An error occurred. Please try again."
 			  : "";
 
+	const callbackUrl = searchParams.get("callbackUrl");
+
 	const form = useForm<z.infer<typeof LoginSchema>>({
 		resolver: zodResolver(LoginSchema),
 		defaultValues: {
@@ -48,7 +50,7 @@ export function LoginForm() {
 		setSuccess("");
 
 		startTransition(() => {
-			login(values)
+			login(values, callbackUrl)
 				.then((data) => {
 					if (data?.error) {
 						form.resetField("password");

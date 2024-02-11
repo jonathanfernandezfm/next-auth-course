@@ -1,6 +1,8 @@
 "use client";
 
+import { LoginForm } from "@/components/auth/login-form";
 import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { useRouter } from "next/navigation";
 
 interface LoginButtonProps {
@@ -19,6 +21,19 @@ export function LoginButton({
 	const handleClick = async () => {
 		router.push("/auth/login");
 	};
+
+	if (mode === "modal") {
+		return (
+			<Dialog>
+				<DialogTrigger asChild={asChild}>
+					<Button>{children}</Button>
+				</DialogTrigger>
+				<DialogContent className="p-0 border-none bg-transparent w-auto">
+					<LoginForm />
+				</DialogContent>
+			</Dialog>
+		);
+	}
 
 	return <Button onClick={handleClick}>{children}</Button>;
 }

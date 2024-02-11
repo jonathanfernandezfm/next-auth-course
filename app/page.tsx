@@ -6,8 +6,11 @@ export default function Home() {
 			<div className="space-y-6 text-center">
 				<h1 className="text-4xl font-bold text-center text-slate-900">Auth</h1>
 				<p>NextJS Authentication course</p>
-				<div>
+				<div className="space-x-2">
 					<LoginButton>Sign in</LoginButton>
+					<LoginButton mode="modal" asChild>
+						Modal Sign in
+					</LoginButton>
 				</div>
 			</div>
 		</main>
